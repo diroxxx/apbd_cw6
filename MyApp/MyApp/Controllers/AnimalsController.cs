@@ -90,14 +90,14 @@ public class AnimalsController: ControllerBase
         command.Connection = connection;
 
         
-        command.CommandText = $"update Animals set Description = @desc, Name = @name, Category = @category, Area = @area  where  animal.Animal == 1";
-        // command.Parameters.AddWithValue("@id", id);
+        command.CommandText = $"update Animal set Animal.Description = @desc, Animal.Name = @name, Animal.Category = @category, Animal.Area = @area  where  Animal.IdAnimal = @id";
+        command.Parameters.AddWithValue("@id", id);
         command.Parameters.AddWithValue("@desc", animal.Description);
         command.Parameters.AddWithValue("@name", animal.Name);
         command.Parameters.AddWithValue("@category", animal.Category);
         command.Parameters.AddWithValue("@area", animal.Area);
 
-        command.ExecuteNonQuery();
+        command.ExecuteReader();
         
         return Ok();
     }
